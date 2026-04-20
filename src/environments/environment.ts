@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:8082',
+  apiBaseUrl: 'http://ac97fb30ab94b436f9f4fecbd4c99b20-346183276.eu-north-1.elb.amazonaws.com',
   useMockApi: false,
   cognito: {
     userPoolId: 'eu-north-1_fVR3iZleW',
