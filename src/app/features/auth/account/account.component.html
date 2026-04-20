@@ -1,0 +1,78 @@
+<div class="account-page-wrapper">
+  <div class="container">
+    <div class="page-header-inner">
+      <h1>My Account</h1>
+      <ul class="breadcrumb-list">
+        <li><a routerLink="/">Home</a></li>
+        <li class="sep">/</li>
+        <li>My Account</li>
+      </ul>
+    </div>
+
+    <!-- Loading state -->
+    <div *ngIf="loading" class="loading-wrap">
+      <p>Loading profile...</p>
+    </div>
+
+    <!-- Error state -->
+    <div *ngIf="error && !loading" class="error-wrap">
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- Profile panel -->
+    <div class="account-panel" *ngIf="profile && !loading">
+      <!-- Avatar & name -->
+      <div class="account-info">
+        <div class="avatar-circle">
+          <i class="icon-user"></i>
+        </div>
+        <h2>{{ profile.firstName }} {{ profile.lastName }}</h2>
+        <p class="user-roles" *ngIf="(userRoles$ | async)?.length">
+          <span class="role-badge" *ngFor="let role of userRoles$ | async">{{ role }}</span>
+        </p>
+      </div>
+
+      <!-- Profile details -->
+      <div class="profile-details">
+        <div class="detail-row">
+          <div class="detail-item">
+            <span class="detail-label"><i class="icon_mail"></i> Email</span>
+            <span class="detail-value">{{ profile.email }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label"><i class="icon-call-in"></i> Phone</span>
+            <span class="detail-value">{{ profile.phone || '—' }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label"><i class="icon-user"></i> Gender</span>
+            <span class="detail-value">{{ profile.gender ? (profile.gender | titlecase) : '—' }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label"><i class="icon_person"></i> Full Name</span>
+            <span class="detail-value">{{ profile.firstName }} {{ profile.lastName }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick links -->
+      <div class="account-actions">
+        <a routerLink="/search" class="action-card">
+          <i class="icon-bag"></i>
+          <span>Browse Products</span>
+        </a>
+        <a routerLink="/contact" class="action-card">
+          <i class="icon_mail"></i>
+          <span>Contact Support</span>
+        </a>
+      </div>
+
+      <!-- Logout -->
+      <div class="logout-section">
+        <button class="btn-logout" (click)="logout()">
+          <i class="icon-logout"></i> Sign Out
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="login-dropdown-panel">
+  <span class="dropdown-triangle-up"></span>
+  <button class="dd-close-btn" (click)="close.emit()"><i class="icon_close"></i></button>
+  <div class="dropdown-head"><h4>Sign in</h4></div>
+  <div class="dd-wrapper">
+    <div id="dd-social-login">
+      <div class="title"><span>Sign in using</span></div>
+      <a class="btn facebook-btn" (click)="onGoogleLogin()" style="cursor:pointer">
+        <i class="social_google"></i> GOOGLE
+      </a>
+    </div>
+    <div style="border-top:1px solid #eee;margin:12px 0;text-align:center">
+      <span style="background:#fff;padding:0 8px;position:relative;top:-10px;color:#999;font-size:11px">OR</span>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onLogin()">
+      <div class="form-group" style="position:relative;margin-bottom:10px">
+        <input type="email" formControlName="email" placeholder="Email / Login"
+               style="width:100%;padding:8px 36px 8px 10px;border:1px solid #ddd;font-size:13px">
+        <i class="icon_mail" style="position:absolute;right:10px;top:9px;color:#999;font-size:14px"></i>
+      </div>
+      <div class="form-group" style="position:relative;margin-bottom:10px">
+        <input type="password" formControlName="password" placeholder="Password"
+               style="width:100%;padding:8px 36px 8px 10px;border:1px solid #ddd;font-size:13px">
+        <i class="icon_lock" style="position:absolute;right:10px;top:9px;color:#999;font-size:14px"></i>
+      </div>
+      <div *ngIf="error$ | async as err" style="color:#e63e3e;font-size:12px;margin-bottom:8px">{{ err }}</div>
+      <div style="text-align:center;margin-bottom:8px">
+        <button type="submit" class="btn btn-sm btn-third-col"
+                [disabled]="form.invalid || (loading$ | async)"
+                style="background:#e63e3e;color:#fff;border:none;padding:7px 20px;font-size:13px;cursor:pointer;width:100%">
+          {{ (loading$ | async) ? 'Logging in...' : 'Login' }}
+        </button>
+      </div>
+      <div style="text-align:center;margin-bottom:8px">
+        <a routerLink="/auth/forgot-password" style="font-size:12px;color:#e63e3e">Forgot your password?</a>
+      </div>
+      <div style="border-top:1px solid #eee;padding-top:10px;text-align:center">
+        <a routerLink="/auth/register" (click)="close.emit()"
+           style="background:#444;color:#fff;border:none;padding:7px 20px;font-size:13px;cursor:pointer;display:inline-block">
+          Register
+        </a>
+      </div>
+    </form>
+  </div>
+</div>

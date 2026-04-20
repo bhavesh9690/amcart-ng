@@ -1,0 +1,72 @@
+<div class="login-page-wrapper">
+  <div class="container">
+    <!-- Page Header -->
+    <div class="page-header-inner">
+      <h1>My Account</h1>
+      <ul class="breadcrumb-list">
+        <li><a routerLink="/">Home</a></li>
+        <li class="sep">/</li>
+        <li>Sign In</li>
+      </ul>
+    </div>
+
+    <div class="row" style="justify-content:center;display:flex">
+
+      <!-- LOGIN PANEL -->
+      <div class="col-md-5">
+        <div class="login-panel">
+          <h2>Sign In</h2>
+
+          <!-- Social -->
+          <div class="social-section">
+            <p class="social-label">Sign in using</p>
+            <button class="google-btn" (click)="onGoogleLogin()">
+              <i class="social_google"></i> Sign in with Google
+            </button>
+          </div>
+
+          <div class="or-divider"><span>OR</span></div>
+
+          <!-- Form -->
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()" novalidate>
+            <div class="field-group" [class.field-error]="email.invalid && email.touched">
+              <input type="email" formControlName="email" placeholder="Email Address" autocomplete="email">
+              <i class="icon_mail field-icon"></i>
+              <div class="field-err-msg" *ngIf="email.errors?.['required'] && email.touched">Email is required.</div>
+              <div class="field-err-msg" *ngIf="email.errors?.['email'] && email.touched">Enter a valid email address.</div>
+            </div>
+
+            <div class="field-group" [class.field-error]="password.invalid && password.touched">
+              <input type="password" formControlName="password" placeholder="Password" autocomplete="current-password">
+              <i class="icon_lock field-icon"></i>
+              <div class="field-err-msg" *ngIf="password.errors?.['required'] && password.touched">Password is required.</div>
+            </div>
+
+            <div class="remember-row">
+              <label class="checkbox-label">
+                <input type="checkbox" formControlName="rememberMe"> Remember me
+              </label>
+            </div>
+
+            <div class="alert-danger" *ngIf="error$ | async as err">{{ err }}</div>
+
+            <button type="submit" class="btn-login" [disabled]="loginForm.invalid || (loading$ | async)">
+              {{ (loading$ | async) ? 'Signing in...' : 'Sign In' }}
+            </button>
+
+            <div style="text-align:center;margin-top:10px">
+              <a routerLink="/auth/forgot-password" class="forgot-link">Forgot your password?</a>
+            </div>
+          </form>
+
+          <div class="divider-line"></div>
+          <div style="text-align:center">
+            <p style="font-size:13px;color:#666;margin-bottom:8px">New to AmCart?</p>
+            <a routerLink="/auth/register" class="btn-register">Create Account</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

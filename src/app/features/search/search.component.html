@@ -1,0 +1,55 @@
+<!-- Page Header -->
+<div style="background:#fff;border-bottom:1px solid #eee;padding:16px 0">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <ul style="list-style:none;margin:0;padding:0;display:flex;gap:6px;font-size:13px;color:#888">
+        <li><a routerLink="/" style="color:#888;text-decoration:none">Home</a></li>
+        <li style="color:#ccc">/</li>
+        <li style="color:#444">Search Results</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div style="background:#f8f8f8;padding:40px 0;min-height:60vh">
+  <div class="container">
+
+    <!-- Query heading -->
+    <div style="margin-bottom:24px">
+      <h1 style="font-size:22px;color:#333;font-weight:700;margin:0 0 6px">
+        Search results for: <em style="color:#e63e3e">"{{ query$ | async }}"</em>
+      </h1>
+      <p style="color:#888;font-size:13px;margin:0" *ngIf="!(searching$ | async)">
+        {{ (results$ | async)?.length || 0 }} product(s) found
+      </p>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="searching$ | async" style="text-align:center;padding:60px">
+      <div style="display:inline-block;width:40px;height:40px;border:3px solid #eee;border-top-color:#e63e3e;border-radius:50%;animation:spin .8s linear infinite"></div>
+      <p style="color:#888;margin-top:12px">Searching...</p>
+    </div>
+
+    <!-- Results Grid -->
+    <div *ngIf="!(searching$ | async)" class="row">
+      <div class="col-md-3 col-sm-6" *ngFor="let product of results$ | async">
+        <app-product-card [product]="product"></app-product-card>
+      </div>
+    </div>
+
+    <!-- No Results -->
+    <div *ngIf="!(searching$ | async) && (results$ | async)?.length === 0"
+         style="text-align:center;padding:60px">
+      <i class="icon_search" style="font-size:48px;color:#ddd;display:block;margin-bottom:16px"></i>
+      <h3 style="color:#444;font-weight:600;margin-bottom:8px">No products found</h3>
+      <p style="color:#888;margin-bottom:24px">
+        We couldn't find any products matching "{{ query$ | async }}". <br>
+        Try different keywords or browse our categories.
+      </p>
+      <a routerLink="/" style="display:inline-block;padding:10px 24px;background:#e63e3e;color:#fff;text-decoration:none;font-size:13px">
+        Back to Home
+      </a>
+    </div>
+
+  </div>
+</div>

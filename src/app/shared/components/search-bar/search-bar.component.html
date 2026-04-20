@@ -1,0 +1,20 @@
+<form (ngSubmit)="onSearch()" class="search-form">
+  <div class="search-wrapper" style="position:relative">
+    <input
+      type="text"
+      [formControl]="searchControl"
+      placeholder="Search products..."
+      class="top-search"
+      autocomplete="off"
+      (focus)="showSuggestions = suggestions.length > 0"
+      (blur)="hideSuggestions()">
+    <button type="submit" style="position:absolute;right:0;top:0;height:100%;padding:0 12px;background:#e63e3e;border:none;color:#fff;cursor:pointer">
+      <i class="icon_search"></i>
+    </button>
+    <ul *ngIf="showSuggestions" class="suggestions-dropdown">
+      <li *ngFor="let s of suggestions" (mousedown)="selectSuggestion(s)">
+        <i class="icon_search" style="margin-right:6px;font-size:11px;color:#999"></i>{{ s }}
+      </li>
+    </ul>
+  </div>
+</form>

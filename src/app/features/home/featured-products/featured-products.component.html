@@ -1,0 +1,24 @@
+<section style="padding:50px 0;background:#f8f8f8">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px">
+      <p style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#999;margin:0 0 6px">Hand Picked</p>
+      <h2 style="font-size:28px;font-weight:700;color:#333;margin:0">Featured Products</h2>
+      <div style="width:40px;height:3px;background:#e63e3e;margin:12px auto 0"></div>
+    </div>
+
+    <div *ngIf="loading$ | async" style="text-align:center;padding:40px">
+      <div style="display:inline-block;width:40px;height:40px;border:3px solid #eee;border-top-color:#e63e3e;border-radius:50%;animation:spin 0.8s linear infinite"></div>
+    </div>
+
+    <div *ngIf="!(loading$ | async)" class="row">
+      <div class="col-md-3 col-sm-6" *ngFor="let product of products$ | async">
+        <app-product-card [product]="product"></app-product-card>
+      </div>
+    </div>
+
+    <div *ngIf="(products$ | async)?.length === 0 && !(loading$ | async)"
+         style="text-align:center;padding:40px;color:#888">
+      No featured products available right now.
+    </div>
+  </div>
+</section>

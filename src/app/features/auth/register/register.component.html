@@ -1,0 +1,124 @@
+<div style="background:#eeeeee;padding:60px 0;min-height:70vh">
+  <div class="container">
+    <!-- Breadcrumb -->
+    <ul style="list-style:none;margin:0 0 20px;padding:0;display:flex;gap:8px;font-size:13px;color:#888">
+      <li><a routerLink="/" style="color:#e63e3e;text-decoration:none">Home</a></li>
+      <li style="color:#ccc">/</li>
+      <li style="color:#444">Create Account</li>
+    </ul>
+
+    <div style="display:flex;justify-content:center">
+      <div style="width:100%;max-width:520px">
+
+        <div style="background:#fff;padding:40px;border:1px solid #ddd;border-radius:4px">
+          <h2 style="font-size:22px;font-weight:700;color:#333;margin:0 0 24px;text-align:center">Create Account</h2>
+
+          <form [formGroup]="registerForm" (ngSubmit)="onRegister()" novalidate>
+
+            <!-- First + Last Name row -->
+            <div style="display:flex;gap:12px;margin-bottom:16px">
+              <div style="flex:1">
+                <input type="text" formControlName="firstName" placeholder="First Name *"
+                  style="width:100%;padding:11px 13px;border:1px solid #ddd;border-radius:4px;font-size:14px;outline:none;box-sizing:border-box"
+                  [style.border-color]="f['firstName'].invalid && f['firstName'].touched ? '#e63e3e' : '#ddd'">
+                <div *ngIf="f['firstName'].invalid && f['firstName'].touched"
+                     style="color:#e63e3e;font-size:11px;margin-top:3px">Required.</div>
+              </div>
+              <div style="flex:1">
+                <input type="text" formControlName="lastName" placeholder="Last Name *"
+                  style="width:100%;padding:11px 13px;border:1px solid #ddd;border-radius:4px;font-size:14px;outline:none;box-sizing:border-box"
+                  [style.border-color]="f['lastName'].invalid && f['lastName'].touched ? '#e63e3e' : '#ddd'">
+                <div *ngIf="f['lastName'].invalid && f['lastName'].touched"
+                     style="color:#e63e3e;font-size:11px;margin-top:3px">Required.</div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div style="margin-bottom:16px">
+              <input type="email" formControlName="email" placeholder="Email Address *"
+                autocomplete="email"
+                style="width:100%;padding:11px 13px;border:1px solid #ddd;border-radius:4px;font-size:14px;outline:none"
+                [style.border-color]="f['email'].invalid && f['email'].touched ? '#e63e3e' : '#ddd'">
+              <div *ngIf="f['email'].invalid && f['email'].touched"
+                   style="color:#e63e3e;font-size:12px;margin-top:4px">
+                <span *ngIf="f['email'].errors?.['required']">Email is required.</span>
+                <span *ngIf="f['email'].errors?.['email']">Enter a valid email.</span>
+              </div>
+            </div>
+
+            <!-- Mobile -->
+            <div style="margin-bottom:16px">
+              <input type="tel" formControlName="mobile" placeholder="Mobile Number (e.g. +914155552671) *"
+                autocomplete="tel"
+                style="width:100%;padding:11px 13px;border:1px solid #ddd;border-radius:4px;font-size:14px;outline:none"
+                [style.border-color]="f['mobile'].invalid && f['mobile'].touched ? '#e63e3e' : '#ddd'">
+              <div style="font-size:11px;color:#999;margin-top:3px">Include country code, e.g. +91XXXXXXXXXX</div>
+              <div *ngIf="f['mobile'].invalid && f['mobile'].touched"
+                   style="color:#e63e3e;font-size:12px;margin-top:3px">
+                <span *ngIf="f['mobile'].errors?.['required']">Mobile number is required.</span>
+                <span *ngIf="f['mobile'].errors?.['pattern']">Enter a valid international number (e.g. +914155552671).</span>
+              </div>
+            </div>
+
+            <!-- Gender -->
+            <div style="margin-bottom:16px">
+              <select formControlName="gender"
+                style="width:100%;padding:11px 13px;border:1px solid #ddd;border-radius:4px;font-size:14px;outline:none;background:#fff;color:#555">
+                <option value="" disabled selected>Gender *</option>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+                <option value="OTHER">Other</option>
+              </select>
+              <div *ngIf="f['gender'].invalid && f['gender'].touched"
+                   style="color:#e63e3e;font-size:12px;margin-top:4px">Please select a gender.</div>
+            </div>
+
+            <!-- Passwords -->
+            <div [formGroup]="passwordGroup">
+              <div style="margin-bottom:16px">
+                <input type="password" formControlName="password" placeholder="Password *"
+                  autocomplete="new-password"
+                  style="width:100%;padding:11px 13px;border:1px solid #ddd;border-radius:4px;font-size:14px;outline:none"
+                  [style.border-color]="passwordGroup.get('password')!.invalid && passwordGroup.get('password')!.touched ? '#e63e3e' : '#ddd'">
+                <div *ngIf="passwordGroup.get('password')!.invalid && passwordGroup.get('password')!.touched"
+                     style="color:#e63e3e;font-size:12px;margin-top:4px">
+                  Password must be at least 6 characters.
+                </div>
+              </div>
+              <div style="margin-bottom:20px">
+                <input type="password" formControlName="confirmPassword" placeholder="Confirm Password *"
+                  autocomplete="new-password"
+                  style="width:100%;padding:11px 13px;border:1px solid #ddd;border-radius:4px;font-size:14px;outline:none"
+                  [style.border-color]="passwordGroup.errors?.['passwordMismatch'] && passwordGroup.get('confirmPassword')!.touched ? '#e63e3e' : '#ddd'">
+                <div *ngIf="passwordGroup.errors?.['passwordMismatch'] && passwordGroup.get('confirmPassword')!.touched"
+                     style="color:#e63e3e;font-size:12px;margin-top:4px">Passwords do not match.</div>
+              </div>
+            </div>
+
+            <!-- Server Error -->
+            <div *ngIf="error$ | async as err"
+                 style="background:#f8d7da;border:1px solid #f5c6cb;color:#721c24;padding:10px 14px;border-radius:4px;margin-bottom:16px;font-size:13px">
+              {{ err }}
+            </div>
+
+            <!-- Submit -->
+            <button type="submit"
+              [disabled]="registerForm.invalid || (isLoading$ | async)"
+              style="width:100%;background:#e63e3e;color:#fff;border:none;padding:13px;font-size:14px;font-weight:600;border-radius:4px;cursor:pointer;letter-spacing:1px;text-transform:uppercase"
+              [style.opacity]="registerForm.invalid ? '0.6' : '1'">
+              <span *ngIf="!(isLoading$ | async)">Create Account</span>
+              <span *ngIf="isLoading$ | async">Creating Account...</span>
+            </button>
+
+          </form>
+
+          <div style="text-align:center;margin-top:20px;font-size:13px;color:#777">
+            Already have an account?
+            <a routerLink="/auth/login" style="color:#e63e3e;text-decoration:none;font-weight:600"> Sign In</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

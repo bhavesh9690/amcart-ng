@@ -1,0 +1,15 @@
+<section style="padding:50px 0;background:#fff">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px">
+      <p style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#999;margin:0 0 6px">Just Landed</p>
+      <h2 style="font-size:28px;font-weight:700;color:#333;margin:0">New Arrivals</h2>
+      <div style="width:40px;height:3px;background:#e63e3e;margin:12px auto 0"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-sm-6" *ngFor="let product of products$ | async">
+        <app-product-card [product]="product"></app-product-card>
+      </div>
+    </div>
+  </div>
+</section>

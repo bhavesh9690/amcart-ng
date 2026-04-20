@@ -1,0 +1,113 @@
+<div class="cart-page-wrapper">
+  <div class="container">
+
+    <!-- Page header -->
+    <div class="page-header-inner">
+      <h1>Shopping Cart</h1>
+      <ul class="breadcrumb-list">
+        <li><a routerLink="/">Home</a></li>
+        <li class="sep">/</li>
+        <li>Cart</li>
+      </ul>
+    </div>
+
+    <!-- Empty cart -->
+    <div class="cart-empty" *ngIf="(cartItems$ | async)?.length === 0">
+      <i class="icon-bag empty-icon"></i>
+      <h2>Your cart is empty</h2>
+      <p>Looks like you haven't added anything to your cart yet.</p>
+      <a routerLink="/" class="btn-continue">Continue Shopping</a>
+    </div>
+
+    <!-- Cart with items -->
+    <div class="cart-layout" *ngIf="(cartItems$ | async)?.length! > 0">
+
+      <!-- Items table -->
+      <div class="cart-table-wrap">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th colspan="2">Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cartItems$ | async" class="cart-row">
+              <!-- Thumbnail -->
+              <td class="td-image">
+                <img [src]="item.product.imageUrl" [alt]="item.product.name"
+                     (error)="onImgError($event)">
+              </td>
+              <!-- Name -->
+              <td class="td-name">
+                <a [routerLink]="['/product', item.product.id]">{{ item.product.name }}</a>
+                <span class="item-brand">{{ item.product.brand }}</span>
+              </td>
+              <!-- Unit price -->
+              <td class="td-price">
+                <span *ngIf="item.product.salePrice" class="price-sale">
+                  {{ item.product.salePrice | currency:'USD':'symbol':'1.2-2' }}
+                </span>
+                <span [class.price-original]="!!item.product.salePrice"
+                      [class.price-normal]="!item.product.salePrice">
+                  {{ item.product.price | currency:'USD':'symbol':'1.2-2' }}
+                </span>
+              </td>
+              <!-- Quantity stepper -->
+              <td class="td-qty">
+                <div class="qty-stepper">
+                  <button class="qty-btn" (click)="decrement(item)" [disabled]="item.quantity <= 1">−</button>
+                  <input type="number" [value]="item.quantity" min="1"
+                         (change)="onQtyChange($event, item.product.id)" class="qty-input">
+                  <button class="qty-btn" (click)="increment(item)">+</button>
+                </div>
+              </td>
+              <!-- Row subtotal -->
+              <td class="td-subtotal">
+                {{ (item.product.salePrice ?? item.product.price) * item.quantity | currency:'USD':'symbol':'1.2-2' }}
+              </td>
+              <!-- Remove -->
+              <td class="td-remove">
+                <button class="remove-btn" (click)="remove(item.product.id)" title="Remove">
+                  <i class="icon_close"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Table footer actions -->
+        <div class="cart-table-footer">
+          <a routerLink="/" class="btn-secondary">← Continue Shopping</a>
+          <button class="btn-danger" (click)="clearCart()">Clear Cart</button>
+        </div>
+      </div>
+
+      <!-- Order summary -->
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>{{ cartSubtotal$ | async | currency:'USD':'symbol':'1.2-2' }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span class="shipping-note">Calculated at checkout</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-row summary-total">
+          <span>Estimated Total</span>
+          <span>{{ cartSubtotal$ | async | currency:'USD':'symbol':'1.2-2' }}</span>
+        </div>
+
+        <a routerLink="/checkout" class="btn-checkout">Proceed to Checkout</a>
+        <p class="secure-note"><i class="icon_lock"></i> Secure &amp; Encrypted Checkout</p>
+      </div>
+
+    </div>
+  </div>
+</div>

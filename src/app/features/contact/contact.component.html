@@ -1,0 +1,177 @@
+<!-- Page Header -->
+<div style="background:#fff;border-bottom:1px solid #eee;padding:20px 0">
+  <div class="container">
+    <ul style="list-style:none;margin:0;padding:0;display:flex;gap:8px;font-size:13px;color:#888">
+      <li><a routerLink="/" style="color:#e63e3e;text-decoration:none">Home</a></li>
+      <li style="color:#ccc">/</li>
+      <li style="color:#444">About &amp; Contact</li>
+    </ul>
+    <h1 style="font-size:26px;font-weight:700;color:#333;margin:8px 0 0">About Us &amp; Contact</h1>
+  </div>
+</div>
+
+<!-- About Section -->
+<section style="padding:60px 0;background:#fff">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px">
+      <p style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#999;margin:0 0 6px">Who We Are</p>
+      <h2 style="font-size:30px;font-weight:700;color:#333;margin:0">About AmCart</h2>
+      <div style="width:40px;height:3px;background:#e63e3e;margin:12px auto 0"></div>
+    </div>
+
+    <div style="max-width:760px;margin:0 auto;text-align:center;color:#666;font-size:15px;line-height:1.8">
+      AmCart is your premier online destination for clothing and accessories for Women and Men.
+      We bring you the latest trends at unbeatable prices, backed by a seamless shopping experience
+      and world-class customer service. Our curated collections span everything from everyday
+      essentials to statement fashion pieces.
+    </div>
+
+    <!-- Highlights -->
+    <div class="row" style="margin-top:48px;text-align:center">
+      <div class="col-md-4">
+        <div style="padding:30px 20px;border:1px solid #eee;border-radius:6px;margin:10px">
+          <div style="font-size:36px;color:#e63e3e;margin-bottom:12px">
+            <i class="icon-rocket"></i>
+          </div>
+          <h4 style="font-size:16px;font-weight:600;color:#333;margin:0 0 8px">Fast Delivery</h4>
+          <p style="font-size:13px;color:#888;margin:0">Free shipping on all orders over $100. Express delivery available.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div style="padding:30px 20px;border:1px solid #eee;border-radius:6px;margin:10px">
+          <div style="font-size:36px;color:#e63e3e;margin-bottom:12px">
+            <i class="icon-reload"></i>
+          </div>
+          <h4 style="font-size:16px;font-weight:600;color:#333;margin:0 0 8px">Easy Returns</h4>
+          <p style="font-size:13px;color:#888;margin:0">30-day hassle-free return policy. No questions asked.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div style="padding:30px 20px;border:1px solid #eee;border-radius:6px;margin:10px">
+          <div style="font-size:36px;color:#e63e3e;margin-bottom:12px">
+            <i class="icon-lock"></i>
+          </div>
+          <h4 style="font-size:16px;font-weight:600;color:#333;margin:0 0 8px">Secure Payment</h4>
+          <p style="font-size:13px;color:#888;margin:0">PayPal and direct bank transfer. 100% secure checkout.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section style="padding:60px 0;background:#f8f8f8">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px">
+      <p style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#999;margin:0 0 6px">We'd Love to Hear From You</p>
+      <h2 style="font-size:30px;font-weight:700;color:#333;margin:0">Get In Touch</h2>
+      <div style="width:40px;height:3px;background:#e63e3e;margin:12px auto 0"></div>
+    </div>
+
+    <div class="row">
+      <!-- Contact Form -->
+      <div class="col-md-7">
+        <div style="background:#fff;padding:36px;border:1px solid #eee;border-radius:6px">
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+
+            <div style="margin-bottom:16px">
+              <input
+                type="text"
+                formControlName="name"
+                placeholder="Your Name *"
+                style="width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:4px;font-size:14px;outline:none"
+                [style.border-color]="f['name'].invalid && f['name'].touched ? '#e63e3e' : '#ddd'">
+              <div *ngIf="f['name'].invalid && f['name'].touched"
+                   style="color:#e63e3e;font-size:12px;margin-top:4px">Name is required.</div>
+            </div>
+
+            <div style="margin-bottom:16px">
+              <input
+                type="email"
+                formControlName="email"
+                placeholder="Your Email *"
+                style="width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:4px;font-size:14px;outline:none"
+                [style.border-color]="f['email'].invalid && f['email'].touched ? '#e63e3e' : '#ddd'">
+              <div *ngIf="f['email'].invalid && f['email'].touched"
+                   style="color:#e63e3e;font-size:12px;margin-top:4px">A valid email is required.</div>
+            </div>
+
+            <div style="margin-bottom:16px">
+              <input
+                type="text"
+                formControlName="subject"
+                placeholder="Subject"
+                style="width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:4px;font-size:14px;outline:none">
+            </div>
+
+            <div style="margin-bottom:20px">
+              <textarea
+                formControlName="message"
+                rows="5"
+                placeholder="Your Message *"
+                style="width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:4px;font-size:14px;outline:none;resize:vertical"
+                [style.border-color]="f['message'].invalid && f['message'].touched ? '#e63e3e' : '#ddd'"></textarea>
+              <div *ngIf="f['message'].invalid && f['message'].touched"
+                   style="color:#e63e3e;font-size:12px;margin-top:4px">Message is required (min 10 characters).</div>
+            </div>
+
+            <div *ngIf="submitSuccess"
+                 style="background:#d4edda;border:1px solid #c3e6cb;color:#155724;padding:12px 16px;border-radius:4px;margin-bottom:16px;font-size:14px">
+              Thank you! Your message has been sent. We'll respond within 24 hours.
+            </div>
+
+            <button
+              type="submit"
+              [disabled]="contactForm.invalid || isSubmitting"
+              style="background:#e63e3e;color:#fff;border:none;padding:12px 32px;font-size:14px;font-weight:600;border-radius:4px;cursor:pointer;letter-spacing:1px;text-transform:uppercase"
+              [style.opacity]="contactForm.invalid || isSubmitting ? '0.6' : '1'">
+              {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-md-5">
+        <div style="padding:36px 30px">
+          <h3 style="font-size:18px;font-weight:700;color:#333;margin:0 0 24px">Contact Information</h3>
+          <ul style="list-style:none;padding:0;margin:0">
+            <li style="display:flex;gap:14px;margin-bottom:20px;align-items:flex-start">
+              <i class="icon-map" style="color:#e63e3e;font-size:20px;margin-top:2px;flex-shrink:0"></i>
+              <span style="color:#666;font-size:14px;line-height:1.6">123 Fashion Street,<br>New York, NY 10001, USA</span>
+            </li>
+            <li style="display:flex;gap:14px;margin-bottom:20px;align-items:center">
+              <i class="icon-call-in" style="color:#e63e3e;font-size:20px;flex-shrink:0"></i>
+              <span style="color:#666;font-size:14px">+1 (800) 2364 332</span>
+            </li>
+            <li style="display:flex;gap:14px;margin-bottom:20px;align-items:center">
+              <i class="icon-envelope" style="color:#e63e3e;font-size:20px;flex-shrink:0"></i>
+              <a href="mailto:support@amcart.com" style="color:#e63e3e;font-size:14px;text-decoration:none">support&#64;amcart.com</a>
+            </li>
+            <li style="display:flex;gap:14px;margin-bottom:20px;align-items:center">
+              <i class="icon-clock" style="color:#e63e3e;font-size:20px;flex-shrink:0"></i>
+              <span style="color:#666;font-size:14px">Mon – Sat: 9:00 AM – 6:00 PM EST</span>
+            </li>
+          </ul>
+
+          <div style="margin-top:32px;border-top:1px solid #eee;padding-top:24px">
+            <h4 style="font-size:14px;font-weight:600;color:#333;margin:0 0 14px;text-transform:uppercase;letter-spacing:1px">Follow Us</h4>
+            <div style="display:flex;gap:12px">
+              <a href="#" style="width:36px;height:36px;border-radius:50%;background:#3b5998;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px">
+                <i class="social_facebook"></i>
+              </a>
+              <a href="#" style="width:36px;height:36px;border-radius:50%;background:#1da1f2;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px">
+                <i class="social_twitter"></i>
+              </a>
+              <a href="#" style="width:36px;height:36px;border-radius:50%;background:#e1306c;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px">
+                <i class="social_instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

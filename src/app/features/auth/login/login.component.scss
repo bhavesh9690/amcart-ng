@@ -1,0 +1,32 @@
+.login-page-wrapper { background:#eeeeee; min-height:calc(100vh - 200px); padding:40px 0 60px; }
+.page-header-inner { padding:20px 0; margin-bottom:24px; border-bottom:1px solid #ddd; }
+.page-header-inner h1 { font-size:22px; color:#444; margin:0 0 6px; }
+.breadcrumb-list { list-style:none; padding:0; margin:0; display:flex; gap:6px; font-size:13px; color:#888; }
+.breadcrumb-list a { color:#888; text-decoration:none; }
+.breadcrumb-list a:hover { color:#e63e3e; }
+.breadcrumb-list .sep { color:#ccc; }
+.login-panel { background:#fff; padding:36px; border:1px solid #ddd; box-shadow:0 2px 8px rgba(0,0,0,.06); }
+.login-panel h2 { font-size:20px; color:#444; text-align:center; margin:0 0 20px; font-weight:700; }
+.social-section { text-align:center; }
+.social-label { font-size:12px; color:#999; margin-bottom:8px; }
+.google-btn { background:#dd4b39; color:#fff; border:none; padding:10px; width:100%; font-size:13px; cursor:pointer; border-radius:3px; }
+.google-btn:hover { background:#c23321; }
+.or-divider { text-align:center; margin:16px 0; border-top:1px solid #eee; }
+.or-divider span { background:#fff; padding:0 10px; position:relative; top:-11px; color:#aaa; font-size:11px; }
+.field-group { position:relative; margin-bottom:14px; }
+.field-group input { width:100%; padding:10px 36px 10px 12px; border:1px solid #ddd; font-size:13px; border-radius:3px; outline:none; box-sizing:border-box; }
+.field-group input:focus { border-color:#e63e3e; }
+.field-error input { border-color:#e63e3e; }
+.field-icon { position:absolute; right:10px; top:11px; color:#bbb; font-size:15px; }
+.field-err-msg { color:#e63e3e; font-size:11px; margin-top:3px; }
+.remember-row { margin-bottom:14px; }
+.checkbox-label { font-size:13px; color:#666; cursor:pointer; display:flex; align-items:center; gap:6px; }
+.btn-login { background:#e63e3e; color:#fff; border:none; padding:11px; width:100%; font-size:14px; font-weight:600; cursor:pointer; border-radius:3px; transition:background .2s; }
+.btn-login:hover { background:#c93232; }
+.btn-login:disabled { opacity:.6; cursor:not-allowed; }
+.forgot-link { color:#e63e3e; font-size:13px; text-decoration:none; }
+.forgot-link:hover { text-decoration:underline; }
+.divider-line { border-top:1px solid #eee; margin:20px 0; }
+.btn-register { background:#444; color:#fff; padding:9px 28px; font-size:13px; text-decoration:none; border-radius:3px; display:inline-block; }
+.btn-register:hover { background:#222; }
+.alert-danger { background:#ffeaea; border:1px solid #e63e3e; color:#c0392b; padding:8px 12px; border-radius:3px; font-size:13px; margin-bottom:12px; }

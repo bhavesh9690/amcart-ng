@@ -1,0 +1,35 @@
+<div class="hero-slider" style="position:relative;background:#f5f5f5;overflow:hidden">
+  <!-- Slide -->
+  <div class="hero-slide" [style.background]="slides[current].bg" style="min-height:420px;display:flex;align-items:center;transition:background .5s">
+    <div class="container">
+      <div style="max-width:520px;padding:40px 0">
+        <p style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#999;margin:0 0 8px">
+          {{ slides[current].label }}
+        </p>
+        <h1 style="font-size:42px;font-weight:800;color:#333;line-height:1.15;margin:0 0 12px">
+          {{ slides[current].title }}<br>
+          <em style="font-style:italic;color:#e63e3e">{{ slides[current].em }}</em>
+        </h1>
+        <p style="font-size:15px;color:#777;margin:0 0 24px">{{ slides[current].subtitle }}</p>
+        <a [routerLink]="slides[current].ctaLink"
+           style="display:inline-block;padding:12px 32px;background:#e63e3e;color:#fff;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1px;text-decoration:none;transition:background .2s"
+           (mouseenter)="e.style.background='#c62a2a'" (mouseleave)="e.style.background='#e63e3e'" #e>
+          {{ slides[current].ctaText }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dots -->
+  <div style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px">
+    <button *ngFor="let s of slides; let i = index"
+            (click)="current = i"
+            style="width:10px;height:10px;border-radius:50%;border:none;cursor:pointer;transition:background .2s"
+            [style.background]="i === current ? '#e63e3e' : '#ccc'">
+    </button>
+  </div>
+
+  <!-- Arrows -->
+  <button (click)="prev()" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.8);border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px">&#8249;</button>
+  <button (click)="next()" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.8);border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px">&#8250;</button>
+</div>

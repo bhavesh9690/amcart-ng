@@ -1,0 +1,57 @@
+<div class="top-menu">
+  <div class="container">
+    <nav class="main-menu">
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <i class="icon-screen-desktop"></i> Home
+          </a>
+        </li>
+
+        <!-- Women mega menu -->
+        <li class="nav-item has-sub" *ngIf="womenCat">
+          <a routerLink="/women"><i class="icon-user-female"></i> Women</a>
+          <div class="sub-nav full padding">
+            <div class="row">
+              <div class="col-md-3" *ngFor="let group of womenCat.children">
+                <h3 class="sub-nav-title">{{ group.name }}</h3>
+                <ul class="sub-nav-group sub-nav-grey">
+                  <li *ngFor="let sub of group.children">
+                    <a [routerLink]="['/women', sub.slug]"><span>{{ sub.name }}</span></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- Men mega menu -->
+        <li class="nav-item has-sub" *ngIf="menCat">
+          <a routerLink="/men"><i class="icon-user"></i> Men</a>
+          <div class="sub-nav full padding">
+            <div class="row">
+              <div class="col-md-3" *ngFor="let group of menCat.children">
+                <h3 class="sub-nav-title">{{ group.name }}</h3>
+                <ul class="sub-nav-group sub-nav-grey">
+                  <li *ngFor="let sub of group.children">
+                    <a [routerLink]="['/men', sub.slug]"><span>{{ sub.name }}</span></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a routerLink="/sale" style="color:#e63e3e;font-weight:700">SALE</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/contact">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

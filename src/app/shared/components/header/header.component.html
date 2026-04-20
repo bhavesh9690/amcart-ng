@@ -1,0 +1,74 @@
+<!-- TOP BAR -->
+<div id="top-bar">
+  <div class="container">
+    <div class="pull-left left-top-bar">
+      <ul class="list-inline hidden-xs" style="margin:0;padding:0">
+        <li style="display:inline-block;padding:0 8px;font-size:12px;color:#aaa">
+          <i class="icon-call-in"></i> +1 (800) 2364 332
+        </li>
+        <li style="display:inline-block;padding:0 8px;font-size:12px">
+          <a href="mailto:support@amcart.com" style="color:#aaa">
+            <i class="icon-envelope"></i> support&#64;amcart.com
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="pull-right">
+      <ul class="list-inline" style="margin:0;padding:0">
+        <!-- Cart -->
+        <li style="display:inline-block;padding:0 4px">
+          <a routerLink="/cart" class="pm_item" style="color:#fff;font-size:13px;text-decoration:none;position:relative">
+            <i class="icon-bag"></i> Cart
+            <span *ngIf="(cartCount$ | async)! > 0" class="cart-badge">{{ cartCount$ | async }}</span>
+          </a>
+        </li>
+        <!-- Login / User -->
+        <li style="display:inline-block;padding:0 4px;position:relative">
+          <ng-container *ngIf="!(isLoggedIn$ | async); else loggedIn">
+            <a class="pm_item" (click)="toggleLogin()" style="cursor:pointer;color:#fff;font-size:13px">
+              <i class="icon-login"></i> Login
+            </a>
+            <app-login-dropdown *ngIf="showLogin" (close)="showLogin=false"></app-login-dropdown>
+          </ng-container>
+          <ng-template #loggedIn>
+            <a routerLink="/account" class="pm_item" style="color:#fff;font-size:13px;text-decoration:none">
+              <i class="icon-user"></i> {{ userEmail$ | async }}
+            </a>
+            <a (click)="logout()" style="cursor:pointer;color:#aaa;font-size:12px;margin-left:8px">Logout</a>
+          </ng-template>
+        </li>
+        <!-- Wishlist -->
+        <li class="hidden-xs" style="display:inline-block;padding:0 4px">
+          <a routerLink="/account/wishlist" class="pm_item" style="color:#fff;font-size:13px;text-decoration:none">
+            <i class="icon-heart"></i> Wishlist
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER BAR -->
+<div id="header-bar">
+  <div class="container">
+    <div class="row" style="align-items:center">
+      <div id="header-logo" class="col-md-4 col-sm-6">
+        <a routerLink="/" style="text-decoration:none">
+          <span style="font-size:28px;font-weight:900;color:#e63e3e;letter-spacing:-1px">Am</span><span style="font-size:28px;font-weight:900;color:#444">Cart</span>
+        </a>
+      </div>
+      <div class="col-md-4 hidden-sm hidden-xs">
+        <app-search-bar></app-search-bar>
+      </div>
+      <div class="col-md-4 hidden-sm hidden-xs" style="text-align:right">
+        <a routerLink="/cart" style="text-decoration:none;color:#444;font-size:14px">
+          <i class="icon-bag" style="font-size:20px;vertical-align:middle"></i>
+          <span style="margin-left:6px">{{ cartCount$ | async }} item(s) / <strong style="color:#e63e3e">{{ cartSubtotal$ | async | currency:'USD':'symbol':'1.2-2' }}</strong></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN NAV MENU -->
+<app-nav-menu [categories]="categories$ | async"></app-nav-menu>
