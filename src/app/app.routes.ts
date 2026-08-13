@@ -37,6 +37,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/contact/contact.component').then(m => m.ContactComponent)
   },
   {
+    path: 'product/:id',
+    loadComponent: () => import('./features/product/product-detail.component').then(m => m.ProductDetailComponent)
+  },
+  {
     path: 'about',
     redirectTo: 'contact',
     pathMatch: 'full'

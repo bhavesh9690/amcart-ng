@@ -3,12 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { SnackbarComponent } from './shared/components/snackbar/snackbar.component';
 import * as AuthActions from './store/auth/auth.actions';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, SnackbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

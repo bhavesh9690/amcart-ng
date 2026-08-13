@@ -1,0 +1,25 @@
+<div *ngIf="product$ | async as product; else loading" class="product-detail">
+  <div class="product-detail-main">
+    <div class="product-image">
+      <img [src]="product.imageUrl" [alt]="product.name" (error)="null" />
+    </div>
+    <div class="product-info">
+      <h1>{{ product.name }}</h1>
+      <div class="product-rating">
+        <span *ngFor="let s of stars" class="star" [class.filled]="s <= product.rating">&#9733;</span>
+        <span class="review-count">({{ product.reviewCount }})</span>
+      </div>
+      <div class="product-price">
+        <span *ngIf="product.salePrice" class="price-sale">{{ product.salePrice | currency:'USD':'symbol':'1.2-2' }}</span>
+        <span [class.price-original]="!!product.salePrice">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</span>
+      </div>
+      <p><strong>Category:</strong> {{ product.category }}</p>
+      <p><strong>Brand:</strong> {{ product.brand }}</p>
+      <div class="product-actions">
+        <button class="btn btn-primary" (click)="addToCart(product)" [disabled]="!product.inStock">ADD TO CART</button>
+        <a class="btn-link back-link" routerLink="/">Back to store</a>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loading>Loading product...</ng-template>

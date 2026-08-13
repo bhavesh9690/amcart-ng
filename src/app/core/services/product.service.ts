@@ -111,6 +111,16 @@ export class ProductService {
     return this.api.get<string[]>('/api/v1/search/suggest', { q: query });
   }
 
+  getProductById(id: string): Observable<Product | undefined> {
+    if (environment.useMockApi) {
+      const found = MOCK_PRODUCTS.find(p => p.id === id);
+      return of(found ? normalizeProductImage(found) : undefined);
+    }
+    return this.api.get<Product>(`/api/v1/products/${id}`).pipe(
+      map(p => p ? normalizeProductImage(p) : p)
+    );
+  }
+
   getCategories(): Observable<Category[]> {
     if (environment.useMockApi) return of(MOCK_CATEGORIES);
     return this.api.get<Category[]>('/api/v1/categories');

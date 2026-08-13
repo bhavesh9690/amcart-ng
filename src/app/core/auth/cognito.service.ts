@@ -32,8 +32,7 @@ export class CognitoService {
         options: {
           userAttributes: {
             email: data.email,
-            given_name: data.firstName,
-            family_name: data.lastName,
+            name: data.firstName + ' ' + data.lastName,
             phone_number: this.toE164(data.mobile),
             gender: data.gender,
           },
