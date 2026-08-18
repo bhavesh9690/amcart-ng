@@ -57,16 +57,10 @@ jobs:
 
       - name: Deploy Angular files to S3
         run: |
-          aws s3 sync dist/ s3://$S3_BUCKET/ \
+          aws s3 sync dist/amcart/browser/ s3://$S3_BUCKET/ \
             --delete \
             --exclude "config.json"
 
-      - name: Upload environment config
-        run: |
-          aws s3 cp config/config-staging.json \
-            s3://$S3_BUCKET/config.json \
-            --cache-control "no-cache, no-store, must-revalidate" \
-            --content-type "application/json"
 
       - name: Deployment summary
         run: |
