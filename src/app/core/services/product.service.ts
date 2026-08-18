@@ -121,6 +121,19 @@ export class ProductService {
     );
   }
 
+  getAllProducts(): Observable<Product[]> {
+    if (environment.useMockApi) return of(MOCK_PRODUCTS.map(normalizeProductImage));
+    return this.api.get<{ content: Product[] }>('/api/v1/products').pipe(
+      map(res => res.content.map(normalizeProductImage))
+    );
+  }
+
+  uploadProductImages(productId: string, files: FileList): Observable<any> {
+    const fd = new FormData();
+    Array.from(files).forEach((f, i) => fd.append('images', f, f.name));
+    return this.api.post(`/api/v1/products/${productId}/images`, fd);
+  }
+
   getCategories(): Observable<Category[]> {
     if (environment.useMockApi) return of(MOCK_CATEGORIES);
     return this.api.get<Category[]>('/api/v1/categories');

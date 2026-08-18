@@ -1,6 +1,6 @@
 <div class="snackbar-wrapper" [class.visible]="visible" *ngIf="message">
-  <div class="snackbar" [class.success]="message?.type==='success'" [class.error]="message?.type==='error'">
-    <div class="snackbar-text">{{ message?.text }}</div>
+  <div class="snackbar" [class.success]="message.type==='success'" [class.error]="message.type==='error'">
+    <div class="snackbar-text">{{ message.text }}</div>
     <button class="snackbar-close" (click)="hide()">×</button>
   </div>
 </div>

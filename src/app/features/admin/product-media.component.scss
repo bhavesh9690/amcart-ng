@@ -1,0 +1,6 @@
+.admin-media { max-width: 900px; margin: 24px auto; background: #fff; padding: 20px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  h2 { margin-top: 0; }
+  .form-row { margin-bottom: 12px; display: flex; flex-direction: column; }
+  label { font-weight: 600; margin-bottom: 6px; }
+  select, input[type="file"] { padding: 8px; border: 1px solid #ddd; border-radius: 3px; }
+}

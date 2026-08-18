@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, map, switchMap, take } from 'rxjs/operators';
-import { selectIsLoggedIn, selectSessionChecked } from '../../store/auth/auth.selectors';
+import { selectIsLoggedIn, selectSessionChecked, selectUserRoles } from '../../store/auth/auth.selectors';
 
 /**
  * Wait until initAuth has finished (sessionChecked = true) before reading
@@ -38,4 +38,22 @@ export const guestGuard: CanActivateFn = () => {
   const store = inject(Store);
   const router = inject(Router);
   return waitForSessionThen(store, isLoggedIn => !isLoggedIn, '/', router);
+};
+
+export const adminGuard: CanActivateFn = () => {
+  const store = inject(Store);
+  const router = inject(Router);
+  return store.select(selectSessionChecked).pipe(
+    filter(checked => checked),
+    take(1),
+    switchMap(() => store.select(selectUserRoles).pipe(take(1))),
+    map(roles => {
+      const hasAdmin = Array.isArray(roles) && roles.includes('ADMIN');
+      if (!hasAdmin) {
+        router.navigate(['/']);
+        return false;
+      }
+      return true;
+    })
+  );
 };

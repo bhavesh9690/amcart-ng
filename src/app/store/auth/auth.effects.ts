@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { Hub } from 'aws-amplify/utils';
 import * as AuthActions from './auth.actions';
+import * as CartActions from '../cart/cart.actions';
 import { AuthService } from '../../core/auth/auth.service';
 
 function cognitoErrorMessage(err: any): string {
@@ -93,7 +94,18 @@ export class AuthEffects implements OnDestroy {
   loginSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginSuccess),
-      tap(() => this.router.navigate(['/']))
+      tap(({ response }) => {
+        console.log('[Auth] LoginSuccess - roles:', response.roles);
+        this.router.navigate(['/']);
+      })
+    ),
+    { dispatch: false }
+  );
+
+  restoreSessionSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.restoreSessionSuccess),
+      tap(({ response }) => console.log('[Auth] RestoreSessionSuccess - roles:', response.roles))
     ),
     { dispatch: false }
   );
@@ -104,9 +116,9 @@ export class AuthEffects implements OnDestroy {
       tap(() => {
         this.authService.logout();
         this.router.navigate(['/auth/login']);
-      })
-    ),
-    { dispatch: false }
+      }),
+      map(() => CartActions.clearCart())
+    )
   );
 
   register$ = createEffect(() =>

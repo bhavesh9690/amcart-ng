@@ -43,6 +43,12 @@
             <i class="icon-heart"></i> Wishlist
           </a>
         </li>
+        <!-- Admin link (visible to ADMIN role) -->
+        <li class="hidden-xs" *ngIf="(isAdmin$ | async)" style="display:inline-block;padding:0 4px">
+          <a routerLink="/admin/product-media" class="pm_item" style="color:#fff;font-size:13px;text-decoration:none">
+            <i class="icon-settings"></i> Admin
+          </a>
+        </li>
       </ul>
     </div>
   </div>

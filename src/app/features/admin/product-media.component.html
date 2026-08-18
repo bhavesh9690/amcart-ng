@@ -1,0 +1,20 @@
+<div class="admin-media">
+  <h2>Upload Product Images (Admin)</h2>
+
+  <div class="form-row">
+    <label>Product</label>
+    <select [(ngModel)]="selectedProductId">
+      <option value="">-- Select product --</option>
+      <option *ngFor="let p of products" [value]="p.id">{{ p.name }} ({{ p.id }})</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label>Images</label>
+    <input type="file" accept="image/*" (change)="onFilesChange($event)" multiple />
+  </div>
+
+  <div class="form-row">
+    <button class="btn btn-primary" (click)="upload()" [disabled]="uploading">{{ uploading ? 'Uploading...' : 'Upload' }}</button>
+  </div>
+</div>
