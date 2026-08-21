@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:8082',
+  apiBaseUrl: 'http://k8s-ecommerc-products-ba7a41f2cf-6b205eadd49af56a.elb.eu-north-1.amazonaws.com',
   useMockApi: false,
   cognito: {
     userPoolId: 'eu-north-1_rKf9Ua4v3',
