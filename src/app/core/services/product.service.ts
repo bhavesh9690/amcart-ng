@@ -97,7 +97,16 @@ export class ProductService {
       );
       return of({ products: filtered, total: filtered.length, page, pageSize: size });
     }
-    return this.api.get<SearchResult>('/api/v1/search', { q: query, page: String(page), size: String(size) });
+    return this.api.get<{ content: Product[]; totalElements: number; page: number; size: number }>(
+      '/api/v1/search/suggest', { q: query, page: String(page), size: String(size) }
+    ).pipe(
+      map(res => ({
+        products: res.content.map(normalizeProductImage),
+        total: res.totalElements,
+        page: res.page,
+        pageSize: res.size,
+      }))
+    );
   }
 
   getSuggestions(query: string): Observable<string[]> {
@@ -108,7 +117,9 @@ export class ProductService {
         .slice(0, 5);
       return of(suggestions);
     }
-    return this.api.get<string[]>('/api/v1/search/suggest', { q: query });
+    return this.api.get<{ content: Product[] }>('/api/v1/search/suggest', { q: query }).pipe(
+      map(res => res.content.map(product => product.name).slice(0, 5))
+    );
   }
 
   getProductById(id: string): Observable<Product | undefined> {
